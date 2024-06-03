@@ -34,6 +34,8 @@ class Client:
         self.transactions.append(transaction)
         item.transactions.append(transaction)
 
+    def total_spent(self):
+        return sum(transaction.amount for transaction in self.transactions)
 
 class Items:
     def __init__(self, name, currency, price = 0.0):
@@ -76,7 +78,7 @@ clients[1].make_payment(clients[1].items[1], 83.65, 'Powerbank')
 clients[1].make_payment(clients[1].items[2], 17.30, 'Charger')
 clients[2].make_payment(clients[2].items[0], 17.20, 'Candles')
 clients[3].make_payment(clients[3].items[0], 9.99, 'Toys')
-clients[3].make_payment(clients[3].items[1], 11.50, 'Sweets')
+clients[3].make_payment(clients[3].items[1], 11.00, 'Sweets')
 
 print(f'In our store "Buy all what you need & dont need!" in total purchased {Client.number_of_clients} clients:')
 
@@ -86,3 +88,5 @@ for client in clients:
     print(f'    {item.name} ({item.currency}) {item.price}')
     for transaction in item.transactions:
       print(f'    {transaction.time_stamp} {transaction.currency} {transaction.amount}')
+
+  print(f'Total spent by {client.name}: {client.total_spent()} {client.items[0].currency}\n')
